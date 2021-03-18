@@ -22,7 +22,7 @@ const contractList = {
         type: "function",
       },
     ],
-    contractAddress: "0xD1716686a7Bc8e175547670278760619bf2D9E87",
+    contractAddress: "0x7fA344218FE52F15Df38c5021c6B7D05D005a43c",
   },
 };
 export default contractList;
