@@ -10,7 +10,7 @@ const BulckTable = ({ getData }) => {
           if (index == 0) return [];
           return [
             ...trList,
-            { address: crRow[2], amount: crRow[3] * 10000, keyNum: index },
+            { address: crRow[2], amount: crRow[3] * 100000, keyNum: index },
           ];
         }, []);
         getData(convertData);

@@ -32,13 +32,17 @@ function App() {
         from: sender, // default from address
       });
       const { amounts, addresses } = data;
+      let amountSum = amounts.reduce((lastData, current) => {
+        return Number(Number(lastData) + Number(current));
+      }, 0);
+      console.log(amountSum);
       contract.methods
         .bulkSend(addresses, amounts)
         .send({
-          value: utils.toWei("1", "ether"),
+          value: amountSum,
           from: sender,
           gas: 3000000,
-          gasPrice: "100000000000",
+          gasPrice: "20000000000",
         })
         .catch((e) => {
           notification.warning({ message: String(e) });
@@ -53,12 +57,14 @@ function App() {
     const cumputedData = pureXlsData.reduce(
       (lastData, crData) => {
         lastData.addresses.push(crData.address);
-        lastData.amounts.push(utils.toBN(String(crData.amount)));
+        lastData.amounts.push(
+          web3Instans.utils.toWei(String(crData.amount), "wei")
+        );
         return { ...lastData };
       },
       { addresses: [], amounts: [] }
     );
-
+    console.log(cumputedData);
     sendTransaction(cumputedData, selectedWallet);
   };
 
